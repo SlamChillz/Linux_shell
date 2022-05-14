@@ -13,6 +13,7 @@ extern char **environ;
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
+#include <limits.h>
 
 int _intlen(int n);
 int _strlen(char *s);
@@ -34,6 +35,8 @@ void _xit(int n, char *in, char **argv, char **tokens);
 int env(char **tokens);
 int _setenv(char **tokens);
 int _unsetenv(char **tokens);
+char *_getenv(char *var);
+int _chdir(char **tokens);
 int _execbuiltins(char **tokens);
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);

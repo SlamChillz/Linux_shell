@@ -147,3 +147,36 @@ int _unsetenv(char **tokens)
 	return (0);
 }
 
+/**
+ * _getenv - get environment variable
+ * @var: pointer to a string
+ *
+ * Return: pointer to the variable value
+ */
+char *_getenv(char *var)
+{
+	int i, k;
+	char *value;
+
+	if (var == NULL)
+		return (NULL);
+	for (i = 0; environ[i]; i++)
+	{
+		k = 0;
+		if (var[k] == environ[i][k])
+		{
+			for ( ; var[k]; k++)
+			{
+				if (var[k] != environ[i][k])
+					break;
+			}
+			if (var[k] == '\0')
+			{
+				value = (environ[i] + k + 1);
+				return (value);
+			}
+		}
+	}
+	return (NULL);
+}
+

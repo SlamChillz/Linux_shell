@@ -55,6 +55,7 @@ int _execbuiltins(char **tokens)
 {
 	int i, status = 1;
 	builtin b[] = {
+		{"cd", _chdir},
 		{"env", env},
 		{"setenv", _setenv},
 		{"unsetenv", _unsetenv},

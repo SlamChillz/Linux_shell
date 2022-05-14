@@ -42,44 +42,6 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * _intlen - calculate length of an interger
- * @n: integer
- *
- * Return: integer, length of given integer
- */
-int _intlen(int n)
-{
-	int len = 0;
-
-	while (n)
-		len++, n /= 10;
-
-	return (len);
-}
-
-/**
- * _itoa - convert an integer to a string
- * @n: unsigned integer
- *
- * Return: string pointer
- */
-char *_itoa(unsigned int n)
-{
-	int len = _intlen(n), i = 0;
-	char *s = malloc(len + 1);
-
-	printf("%d\n", len);
-	if (s == NULL)
-		return (NULL);
-
-	for ( ; n; i++)
-		s[i] = (n % 10) + '0', n /= 10;
-	s[i] = '\0';
-	_reverse(s);
-	return (s);
-}
-
-/**
  * _reverse - reverse a string
  * @s: string to be reverse
  * Description: a function that reverses a string.
@@ -101,5 +63,40 @@ void _reverse(char *s)
 		s[i--] = s[x];
 		s[x++] = y;
 	}
+}
+
+/**
+ * join - concatenate 3 strings together
+ * @s1: pointer to string 1
+ * @s2: pointer to string 2
+ * @s3: pointer to string 3
+ *
+ * Return: pointer to result string
+ */
+char *join(char *s1, char *s2, char *s3)
+{
+	char *str;
+	int i, k, len1, len2, len3;
+
+	len1 = _strlen(s1), len2 = _strlen(s2), len3 = _strlen(s3);
+
+	str = malloc(len1 + len2 + len3 + 1);
+	if (!str)
+		return (NULL);
+
+	for (i = 0; s1[i]; i++)
+		str[i] = s1[i];
+	k = i;
+
+	for (i = 0; s2[i]; i++)
+		str[k + i] = s2[i];
+	k += i;
+
+	for (i = 0; s3[i]; i++)
+		str[k + i] = s3[i];
+
+	str[k + i] = '\0';
+
+	return (str);
 }
 

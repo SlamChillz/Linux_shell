@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
 	char *input, **tokens;
-	int loop = 0;
+	int loop = 0, status = 0;
 
 	(void) (argc), (void) (argv);
 	while (1)
@@ -30,6 +30,12 @@ int main(int argc, char *argv[])
 
 		if (_strcmp(tokens[0], "exit") == 0)
 			_xit(loop, input, argv, tokens);
+		status = _execbuiltins(tokens);
+		if (status == 0)
+		{
+			free(input), freearray(tokens);
+			continue;
+		}
 	}
 	exit(STATUS);
 }

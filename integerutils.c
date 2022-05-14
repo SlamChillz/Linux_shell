@@ -42,3 +42,42 @@ int _atoi(char *s)
 	return (n);
 }
 
+
+/**
+ * _intlen - calculate length of an interger
+ * @n: integer
+ *
+ * Return: integer, length of given integer
+ */
+int _intlen(int n)
+{
+	int len = 0;
+
+	while (n)
+		len++, n /= 10;
+
+	return (len);
+}
+
+/**
+ * _itoa - convert an integer to a string
+ * @n: unsigned integer
+ *
+ * Return: string pointer
+ */
+char *_itoa(unsigned int n)
+{
+	int len = _intlen(n), i = 0;
+	char *s = malloc(len + 1);
+
+	printf("%d\n", len);
+	if (s == NULL)
+		return (NULL);
+
+	for ( ; n; i++)
+		s[i] = (n % 10) + '0', n /= 10;
+	s[i] = '\0';
+	_reverse(s);
+	return (s);
+}
+

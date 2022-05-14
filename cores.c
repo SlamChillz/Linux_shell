@@ -45,3 +45,30 @@ char *readline(void)
 	return (ptr);
 }
 
+/**
+ * _execbuiltins - check if the command is a built in and execute
+ * @tokens: array of strings
+ *
+ * Return: integer, status vaue
+ */
+int _execbuiltins(char **tokens)
+{
+	int i, status = 1;
+	builtin b[] = {
+		{"env", env},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
+		{NULL, NULL}
+	};
+
+	for (i = 0; b[i].name; i++)
+	{
+		if (_strcmp(b[i].name, tokens[0]) == 0)
+		{
+			status = (b[i].func)(tokens);
+			break;
+		}
+	}
+	return (status);
+}
+

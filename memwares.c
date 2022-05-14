@@ -30,3 +30,18 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	return (ptr);
 }
 
+/**
+ * freearray - freee an array of string pointers
+ * @array: array of string pointers
+ *
+ * Return: void
+ */
+void freearray(char **array)
+{
+	int i = 0;
+
+	while (array[i])
+		free(array[i++]);
+	free(array);
+}
+

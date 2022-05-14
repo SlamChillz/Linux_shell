@@ -34,7 +34,7 @@ void print(char *s)
 
 /**
  * printerror - print error message and shell loop count
- * @input: pointer to an array of strings, user input
+ * @in: pointer to an array of strings, user input
  * @n: number of shell loop
  * @name: pointer to program name
  *
@@ -50,5 +50,22 @@ void printerror(char *in, int n, char *name)
 	print(": ");
 	print(in);
 	print(": not found\n");
+}
+
+/**
+ * exiterror - print error message and shell loop count
+ * @argv: pointer to an array of strings, user input
+ * @n: number of shell loop
+ * @tokens: pointer to program name
+ *
+ * Return: void
+ */
+void exiterror(char **argv, int n, char **tokens)
+{
+	char *e = _itoa(n);
+
+	print(argv[0]), print(": "), print(e), print(": ");
+	print(tokens[0]), print(": Illegal number: "), print(tokens[1]);
+	print("\n"), free(e);
 }
 

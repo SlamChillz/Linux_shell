@@ -68,10 +68,11 @@ char *_itoa(unsigned int n)
 	int len = _intlen(n), i = 0;
 	char *s = malloc(len + 1);
 
+	printf("%d\n", len);
 	if (s == NULL)
 		return (NULL);
 
-	for ( ; n / 10; i++)
+	for ( ; n; i++)
 		s[i] = (n % 10) + '0', n /= 10;
 	s[i] = '\0';
 	_reverse(s);

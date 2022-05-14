@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
 	char *input, **tokens;
-	int i, loop = 0, status = 0;
+	int loop = 0;
 
 	(void) (argc), (void) (argv);
 	while (1)
@@ -27,14 +27,10 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		tokens = tokenise(input);
-		i = 0;
-		while (tokens[i])
-			printf("%s\n", tokens[i++]);
-		i = 0;
-		while (tokens[i])
-			free(tokens[i++]);
-		free(tokens);
+
+		if (_strcmp(tokens[0], "exit") == 0)
+			_xit(loop, input, argv, tokens);
 	}
-	exit(status);
+	exit(STATUS);
 }
 

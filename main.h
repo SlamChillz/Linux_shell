@@ -47,6 +47,7 @@ char **cut(char **token, int n);
 void run(char **token);
 int _execpath(char **token);
 int execute(char **tokens);
+int batch_mode(char *filename);
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void freearray(char **array);

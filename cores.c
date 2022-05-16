@@ -30,7 +30,7 @@ char *readline(void)
 			return (NULL);
 
 		_strcpy(ptr + ptrlen, buf);
-		
+
 		if (buf[buflen - 1] == '\n')
 			return (ptr);
 		ptrlen += buflen;
@@ -44,7 +44,6 @@ char *readline(void)
 	}
 	return (ptr);
 }
-
 
 /**
  * _execpath - execute path command
@@ -83,7 +82,6 @@ int _execpath(char **token)
 	return (1);
 }
 
-
 /**
  * _execbuiltins - check if the command is a built in and execute
  * @tokens: array of strings
@@ -94,12 +92,11 @@ int _execbuiltins(char **tokens)
 {
 	int i, status = 1;
 	builtin b[] = {
-		{"cd", _chdir},
-		{"env", env},
-		{"setenv", _setenv},
-		{"unsetenv", _unsetenv},
-		{NULL, NULL}
-	};
+	    {"cd", _chdir},
+	    {"env", env},
+	    {"setenv", _setenv},
+	    {"unsetenv", _unsetenv},
+	    {NULL, NULL}};
 
 	for (i = 0; b[i].name; i++)
 	{
@@ -112,3 +109,34 @@ int _execbuiltins(char **tokens)
 	return (status);
 }
 
+/**
+ * batch_mode: batch run a script
+ *
+ * @filename: name of file
+ * Return: status
+ */
+int batch_mode(char *filename)
+{
+	FILE *fptr;
+	int status;
+	char line[1024];
+	char **args;
+	fptr = fopen(filename, "r");
+	if (fptr == NULL)
+	{
+		perror("Error:");
+		return (1);
+	}
+	else
+	{
+		while (fgets(line, sizeof(line), fptr) != NULL)
+		{
+			args = tokenise(line);
+			status = execute(args);
+			;
+		}
+	}
+	free(args);
+	fclose(fptr);
+	return (status);
+}

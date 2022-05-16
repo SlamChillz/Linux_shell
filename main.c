@@ -12,33 +12,36 @@ int main(int argc, char *argv[])
 	char *input, **tokens;
 	int status, loop;
 
-	loop = 0;
-	(void) (argc), (void) (argv);
-	while (1)
+	if (argc == 2)
 	{
-		loop++;
-		if (isatty(STDIN_FILENO))
-			prompt();
-		input = readline();
-		if (!input)
-			break;
-		if (input[0] == ' ' ||input[0] == '\0' || _strcmp(input, "\n") == 0)
+		status = batch_mode(argv[1]);
+		exit(status);
+	}
+	else
+	{
+		loop = 0;
+		(void)(argc), (void)(argv);
+		while (1)
 		{
-			free(input);
+			loop++;
+			if (isatty(STDIN_FILENO))
+				prompt();
+			input = readline();
+			if (!input)
+				break;
+			if (input[0] == ' ' || input[0] == '\0' || _strcmp(input, "\n") == 0)
+			{
+				free(input);
+				continue;
+			}
+			tokens = tokenise(input);
+
+			if (_strcmp(tokens[0], "exit") == 0)
+				_xit(loop, input, argv, tokens);
+			status = execute(tokens);
+			free(input), freearray(tokens);
 			continue;
 		}
-		tokens = tokenise(input);
-
-		if (_strcmp(tokens[0], "exit") == 0)
-			_xit(loop, input, argv, tokens);
-		status = execute(tokens);
-		/*
-		if (status == 1)
-			status = _execpath(tokens);
-		*/
-		free(input), freearray(tokens);
-		continue;
 	}
 	exit(status);
 }
-

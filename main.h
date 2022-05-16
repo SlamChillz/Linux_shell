@@ -2,7 +2,7 @@
 #define SHELL
 
 #define BUFFERSIZE 1024 /* size of buffer memory */
-#define DELIMS " \t\r\n" /* delimeters */
+#define DELIMS " :\t\r\n" /* delimeters */
 #define STATUS 0 /* exit status */
 
 extern char **environ;
@@ -14,6 +14,7 @@ extern char **environ;
 #include <sys/wait.h>
 #include <stdio.h>
 #include <limits.h>
+#include <sys/stat.h>
 
 int _intlen(int n);
 int _strlen(char *s);
@@ -23,6 +24,7 @@ char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *copy(char *str, int n);
 char *join(char *s1, char *s2, char *str3);
+char *_strdup(char *str);
 
 int _isalpha(int c);
 int _atoi(char *s);
@@ -38,6 +40,12 @@ int _unsetenv(char **tokens);
 char *_getenv(char *var);
 int _chdir(char **tokens);
 int _execbuiltins(char **tokens);
+int path(char **token);
+int checkoperand(char *str);
+char **cut(char **token, int n);
+void run(char **token);
+int _execpath(char **token);
+int execute(char **tokens);
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void freearray(char **array);
@@ -49,7 +57,7 @@ void printerror(char *in, int n, char *name);
 void exiterror(char **argv, int n, char **tokens);
 
 /**
- * builtin - structure for custom built in functions
+ * struct builtin - structure for custom built in functions
  * @name: string, name of the builtin
  * @func: pointer to a function to execute
  */

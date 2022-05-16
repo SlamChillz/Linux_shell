@@ -40,7 +40,7 @@ void print(char *s)
  *
  * Return: void
  */
-void printerror(char *in, int n, char *name)
+void printerror(char *name, int n, char *in)
 {
 	char *e = _itoa(n);
 

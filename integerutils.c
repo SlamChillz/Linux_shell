@@ -70,7 +70,6 @@ char *_itoa(unsigned int n)
 	int len = _intlen(n), i = 0;
 	char *s = malloc(len + 1);
 
-	printf("%d\n", len);
 	if (s == NULL)
 		return (NULL);
 

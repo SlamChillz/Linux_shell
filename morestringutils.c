@@ -36,3 +36,26 @@ int _strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
+/**
+ * _strdup - Duplicate A String
+ * @str: pointer to a string
+ *
+ * Return: pointer to a string or NULL on failure
+ */
+char *_strdup(char *str)
+{
+	size_t len, i;
+	char *str2;
+
+	len = _strlen(str);
+	str2 = malloc(sizeof(char) * (len + 1));
+
+	if (!str2)
+		return (NULL);
+
+	for (i = 0; i <= len; i++)
+		str2[i] = str[i];
+
+	return (str2);
+}
+

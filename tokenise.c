@@ -44,7 +44,7 @@ char **tokenise(char *str)
 
 	len = _strcount(str);
 	tokens = malloc((len + 1) * sizeof(*tokens));
-	if (tokens == NULL)
+	if (tokens == NULL || str == NULL)
 		return (NULL);
 	for (i = 0; str[i] != '\0'; i++)
 	{

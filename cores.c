@@ -45,6 +45,45 @@ char *readline(void)
 	return (ptr);
 }
 
+
+/**
+ * _execpath - execute path command
+ * @token: array of strings
+ *
+ * Return: exit status
+ */
+int _execpath(char **token)
+{
+	pid_t pid;
+	int wstatus;
+
+	if (!path(token))
+		return (1);
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("Error:");
+		return (1);
+	}
+	if (pid == 0)
+	{
+		if (execve(token[0], token, environ) == -1)
+		{
+			perror("Error:");
+			exit(1);
+		}
+		exit(0);
+	}
+	else
+	{
+		wait(&wstatus);
+	}
+	if (WIFEXITED(wstatus))
+		return (WEXITSTATUS(wstatus));
+	return (1);
+}
+
+
 /**
  * _execbuiltins - check if the command is a built in and execute
  * @tokens: array of strings

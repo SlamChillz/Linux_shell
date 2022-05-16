@@ -10,8 +10,9 @@
 int main(int argc, char *argv[])
 {
 	char *input, **tokens;
-	int loop = 0, status = 0;
+	int status, loop;
 
+	loop = 0;
 	(void) (argc), (void) (argv);
 	while (1)
 	{
@@ -21,7 +22,7 @@ int main(int argc, char *argv[])
 		input = readline();
 		if (!input)
 			break;
-		if (input[0] == '\0' || _strcmp(input, "\n") == 0)
+		if (input[0] == ' ' ||input[0] == '\0' || _strcmp(input, "\n") == 0)
 		{
 			free(input);
 			continue;
@@ -30,13 +31,14 @@ int main(int argc, char *argv[])
 
 		if (_strcmp(tokens[0], "exit") == 0)
 			_xit(loop, input, argv, tokens);
-		status = _execbuiltins(tokens);
-		if (status == 0)
-		{
-			free(input), freearray(tokens);
-			continue;
-		}
+		status = execute(tokens);
+		/*
+		if (status == 1)
+			status = _execpath(tokens);
+		*/
+		free(input), freearray(tokens);
+		continue;
 	}
-	exit(STATUS);
+	exit(status);
 }
 

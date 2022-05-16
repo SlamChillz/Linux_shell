@@ -1,9 +1,9 @@
 #ifndef SHELL
 #define SHELL
 
-#define BUFFERSIZE 1024 /* size of buffer memory */
+#define BUFFERSIZE 1024	  /* size of buffer memory */
 #define DELIMS " :\t\r\n" /* delimeters */
-#define STATUS 0 /* exit status */
+#define STATUS 0	  /* exit status */
 
 extern char **environ;
 
@@ -15,6 +15,7 @@ extern char **environ;
 #include <stdio.h>
 #include <limits.h>
 #include <sys/stat.h>
+#include <signal.h>
 
 int _intlen(int n);
 int _strlen(char *s);
@@ -53,8 +54,10 @@ void freearray(char **array);
 int _putchar(char c);
 void prompt(void);
 void print(char *s);
+void signal_handr(int signum);
 void printerror(char *in, int n, char *name);
 void exiterror(char **argv, int n, char **tokens);
+typedef void (*sighandler_t)(int);
 
 /**
  * struct builtin - structure for custom built in functions

@@ -18,7 +18,20 @@ int _putchar(char c)
  */
 void prompt(void)
 {
+	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, signal_handr);
 	print("($) ");
+}
+
+/**
+ * signal_handr - handle signals
+ *
+ * @signum: Signal value
+ */
+void signal_handr(int signum)
+{
+	print("\n($) ");
+	fflush(stdout);
 }
 
 /**
@@ -68,4 +81,3 @@ void exiterror(char **argv, int n, char **tokens)
 	print(tokens[0]), print(": Illegal number: "), print(tokens[1]);
 	print("\n"), free(e);
 }
-

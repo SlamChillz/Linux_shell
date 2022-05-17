@@ -37,7 +37,7 @@ int path(char **token)
 		if (stat(prev, &st) == 0)
 			return (1);
 	}
-	printerror("./hsh", 1, prev);
+	printerror("./hsh", prev);
 	return (0);
 }
 

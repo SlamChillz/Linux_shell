@@ -6,6 +6,8 @@
 #define STATUS 0	  /* exit status */
 
 extern char **environ;
+extern int loop;
+extern int status;
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -34,7 +36,7 @@ char *readline(void);
 int _strcount(char *str);
 char **tokenise(char *str);
 
-void _xit(int n, char *in, char **argv, char **tokens);
+void _xit(char *in, char **argv, char **tokens);
 int env(char **tokens);
 int _setenv(char **tokens);
 int _unsetenv(char **tokens);
@@ -56,8 +58,8 @@ int _putchar(char c);
 void prompt(void);
 void print(char *s);
 void signal_handr(int signum);
-void printerror(char *in, int n, char *name);
-void exiterror(char **argv, int n, char **tokens);
+void printerror(char *in, char *name);
+void exiterror(char **argv, char **tokens);
 typedef void (*sighandler_t)(int);
 
 /**

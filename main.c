@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 			input = readline();
 			if (!input)
 				break;
-			if (input[0] == '\0' || _strcmp(input, "\n") == 0)
+			if (input[0] == '\0' || _strcmp(input, " \n") == 0 || _strcmp(input, "\n") == 0)
 			{
 				free(input);
 				continue;

@@ -11,6 +11,8 @@ int _strlen(char *s)
 {
 	int i = 0, sum = 0;
 
+	if (s == NULL)
+		return (0);
 	while (s[i] != '\0')
 	{
 		sum = sum + 1;
@@ -99,4 +101,3 @@ char *join(char *s1, char *s2, char *s3)
 
 	return (str);
 }
-

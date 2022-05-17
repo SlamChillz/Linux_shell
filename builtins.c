@@ -36,7 +36,8 @@ void _xit(int n, char *in, char **argv, char **tokens)
 	else if (_atoi(tokens[1]) < 0)
 	{
 		exiterror(argv, n, tokens);
-		free(in), freearray(tokens);
+		/* free(in), freearray(tokens); */
+		return;
 	}
 }
 
@@ -84,7 +85,7 @@ int _setenv(char **tokens)
 		k = 0;
 		if (tokens[1][k] == environ[i][k])
 		{
-			for ( ; tokens[1][k]; k++)
+			for (; tokens[1][k]; k++)
 			{
 				if (tokens[1][k] != environ[i][k])
 					break;
@@ -92,7 +93,7 @@ int _setenv(char **tokens)
 			if (tokens[1][k] == '\0')
 			{
 				n = 0;
-				for ( ; tokens[2][n]; n++)
+				for (; tokens[2][n]; n++)
 				{
 					environ[i][k + 1 + n] = tokens[2][n];
 				}
@@ -129,7 +130,7 @@ int _unsetenv(char **tokens)
 		k = 0;
 		if (tokens[1][k] == environ[i][k])
 		{
-			for ( ; tokens[1][k]; k++)
+			for (; tokens[1][k]; k++)
 			{
 				if (tokens[1][k] != environ[i][k])
 					break;
@@ -138,7 +139,7 @@ int _unsetenv(char **tokens)
 			{
 				free(environ[i]);
 				environ[i] = environ[i + 1];
-				for ( ; environ[i]; i++)
+				for (; environ[i]; i++)
 					environ[i] = environ[i + 1];
 				return (0);
 			}
@@ -165,7 +166,7 @@ char *_getenv(char *var)
 		k = 0;
 		if (var[k] == environ[i][k])
 		{
-			for ( ; var[k]; k++)
+			for (; var[k]; k++)
 			{
 				if (var[k] != environ[i][k])
 					break;
@@ -179,4 +180,3 @@ char *_getenv(char *var)
 	}
 	return (NULL);
 }
-

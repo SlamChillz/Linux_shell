@@ -64,7 +64,7 @@ char **tokenise(char *str)
 				break;
 			}
 		}
-		if (delim == 0) 
+		if (delim == 0)
 			c++;
 		if ((c > 0) && str[i + 1] == '\0')
 		{
@@ -101,4 +101,3 @@ char *copy(char *str, int n)
 	p[i] = '\0';
 	return (p);
 }
-

@@ -44,4 +44,3 @@ void freearray(char **array)
 		free(array[i++]);
 	free(array);
 }
-

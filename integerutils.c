@@ -42,7 +42,6 @@ int _atoi(char *s)
 	return (n);
 }
 
-
 /**
  * _intlen - calculate length of an interger
  * @n: integer
@@ -73,10 +72,9 @@ char *_itoa(unsigned int n)
 	if (s == NULL)
 		return (NULL);
 
-	for ( ; n; i++)
+	for (; n; i++)
 		s[i] = (n % 10) + '0', n /= 10;
 	s[i] = '\0';
 	_reverse(s);
 	return (s);
 }
-

@@ -143,7 +143,7 @@ int execute(char **tokens)
 			token = tokens + i - n;
 			token = cut(token, n);
 			run(token);
-			free(token);
+			freearray(token);
 			op = tokens[i];
 			n = 0;
 			continue;
@@ -153,6 +153,6 @@ int execute(char **tokens)
 	token = tokens + i - n;
 	token = cut(token, n);
 	run(token);
-	free(token);
+	freearray(token);
 	return (prev);
 }

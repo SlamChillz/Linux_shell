@@ -136,7 +136,7 @@ int batch_mode(char *filename)
 			;
 		}
 	}
-	free(args);
+	freearray(args);
 	fclose(fptr);
 	return (status);
 }

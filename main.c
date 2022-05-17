@@ -38,7 +38,8 @@ int main(int argc, char *argv[])
 
 			if (_strcmp(tokens[0], "exit") == 0)
 				_xit(loop, input, argv, tokens);
-			status = execute(tokens);
+			else
+				status = execute(tokens);
 			free(input), freearray(tokens);
 			continue;
 		}

@@ -40,7 +40,6 @@ int _chdir(char **tokens)
 	arr[3] = NULL;
 	_setenv(arr);
 	arr[0] = "setenv", arr[1] = "PWD", arr[2] = cwd, arr[3] = NULL;
-	 _setenv(arr);
+	_setenv(arr);
 	return (0);
 }
-

@@ -9,7 +9,7 @@
  *
  * Return: void
  */
-void _xit(int n, char *in, char **argv, char **tokens)
+void _xit(char *in, char **argv, char **tokens)
 {
 	int i = 0, status;
 
@@ -22,7 +22,7 @@ void _xit(int n, char *in, char **argv, char **tokens)
 	{
 		if (_isalpha(tokens[1][i++]) != 0)
 		{
-			exiterror(argv, n, tokens);
+			exiterror(argv, tokens);
 			free(in), freearray(tokens);
 			return;
 		}
@@ -35,7 +35,7 @@ void _xit(int n, char *in, char **argv, char **tokens)
 	}
 	else if (_atoi(tokens[1]) < 0)
 	{
-		exiterror(argv, n, tokens);
+		exiterror(argv, tokens);
 		/* free(in), freearray(tokens); */
 		return;
 	}

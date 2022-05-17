@@ -1,5 +1,6 @@
 #include "main.h"
 
+int status, loop = 0;
 /**
  * main - program entry
  * @argc: number of commandline arguments
@@ -10,7 +11,6 @@
 int main(int argc, char *argv[])
 {
 	char *input, **tokens;
-	int status, loop;
 
 	if (argc == 2)
 	{
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 			input = readline();
 			if (!input)
 				break;
-			if (input[0] == ' ' || input[0] == '\0' || _strcmp(input, "\n") == 0)
+			if (input[0] == '\0' || _strcmp(input, "\n") == 0)
 			{
 				free(input);
 				continue;
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 			tokens = tokenise(input);
 
 			if (_strcmp(tokens[0], "exit") == 0)
-				_xit(loop, input, argv, tokens);
+				_xit(input, argv, tokens);
 			else
 				status = execute(tokens);
 			free(input), freearray(tokens);

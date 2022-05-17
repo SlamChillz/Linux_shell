@@ -30,6 +30,8 @@ void prompt(void)
  */
 void signal_handr(int signum)
 {
+	(void) (signum);
+
 	print("\n($) ");
 	fflush(stdout);
 }
@@ -53,9 +55,9 @@ void print(char *s)
  *
  * Return: void
  */
-void printerror(char *name, int n, char *in)
+void printerror(char *name, char *in)
 {
-	char *e = _itoa(n);
+	char *e = _itoa(loop);
 
 	print(name);
 	print(": ");
@@ -73,9 +75,9 @@ void printerror(char *name, int n, char *in)
  *
  * Return: void
  */
-void exiterror(char **argv, int n, char **tokens)
+void exiterror(char **argv, char **tokens)
 {
-	char *e = _itoa(n);
+	char *e = _itoa(loop);
 
 	print(argv[0]), print(": "), print(e), print(": ");
 	print(tokens[0]), print(": Illegal number: "), print(tokens[1]);

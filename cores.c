@@ -133,7 +133,6 @@ int batch_mode(char *filename)
 		{
 			args = tokenise(line);
 			status = execute(args);
-			;
 		}
 	}
 	freearray(args);

@@ -30,7 +30,7 @@ void prompt(void)
  */
 void signal_handr(int signum)
 {
-	(void) (signum);
+	(void)(signum);
 
 	print("\n($) ");
 	fflush(stdout);

@@ -13,6 +13,9 @@ char *_strncpy(char *dest, char *src, int n)
 {
 	int i;
 
+	if (dest == NULL)
+		return (NULL);
+
 	for (i = 0; i < n && src[i] != '\0'; i++)
 		dest[i] = src[i];
 	for (; i < n; i++)
@@ -30,6 +33,9 @@ char *_strncpy(char *dest, char *src, int n)
 int _strcmp(char *s1, char *s2)
 {
 	int i;
+
+	if (s1 == NULL || s2 == NULL)
+		return (0);
 
 	for (i = 0; s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i]; i++)
 		;

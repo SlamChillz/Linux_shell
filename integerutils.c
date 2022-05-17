@@ -25,6 +25,9 @@ int _atoi(char *s)
 {
 	int i, j, n, x;
 
+	if (s == NULL)
+		return (0);
+
 	i = n = 0;
 	x = 1;
 	while ((s[i] < '0' || s[i] > '9') && (s[i] != '\0'))

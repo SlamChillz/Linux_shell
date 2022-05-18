@@ -28,8 +28,9 @@ int _chdir(char **tokens, int *stat)
 	}
 	if (status == -1)
 	{
-		perror("hsh");
-		return (-1);
+		print("./hsh: "), _putchar(6 + '0');
+		print(": cd: can't cd to "), print(tokens[1]), print("\n");
+		return (127);
 	}
 	getcwd(cwd, sizeof(cwd));
 	if (cwd == NULL)

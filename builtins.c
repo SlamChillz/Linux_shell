@@ -55,7 +55,8 @@ int env(char **tokens, int *stat)
 
 	if (tokens[1])
 	{
-		print("env: ‘1’: No such file or directory");
+		print("env: '"), print(tokens[1]);
+		print("’: No such file or directory");
 		return (127);
 	}
 
@@ -81,7 +82,7 @@ int _setenv(char **tokens, int *stat)
 	if (!tokens[1] || !tokens[2])
 	{
 		print("Error: Usage-> setenv VARIABLE VALUE\n");
-		return (1);
+		return (127);
 	}
 	for (i = 0; environ[i]; i++)
 	{
@@ -127,7 +128,7 @@ int _unsetenv(char **tokens, int *stat)
 	if (!tokens[1] || tokens[2])
 	{
 		print("Error: Usage-> unsetenv VARIABLE\n");
-		return (1);
+		return (0);
 	}
 	for (i = 0; environ[i]; i++)
 	{
@@ -149,7 +150,8 @@ int _unsetenv(char **tokens, int *stat)
 			}
 		}
 	}
-	return (0);
+	print("Error: Variable "), print(tokens[1]), print(" not found\n");
+	return (127);
 }
 
 /**

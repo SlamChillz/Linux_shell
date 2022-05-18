@@ -53,7 +53,7 @@ char **cut(char **token, int n)
 	int i = 0;
 	char **t;
 
-	t = malloc((n + 1) * sizeof(*t));
+	t = malloc(sizeof(char *) * (n + 2));
 	if (t == NULL)
 		return (NULL);
 	while (i < n)

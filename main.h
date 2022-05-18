@@ -19,6 +19,8 @@ extern int status;
 #include <sys/stat.h>
 #include <signal.h>
 
+void int_mode(char **argv);
+void nonint(char **argv);
 int _intlen(int n);
 int _strlen(char *s);
 void _reverse(char *s);
@@ -33,6 +35,8 @@ int _isalpha(int c);
 int _atoi(char *s);
 
 char *readline(void);
+char *rem_(char *str);
+/*char *rem_spe(char *str);*/
 int _strcount(char *str);
 char **tokenise(char *str);
 

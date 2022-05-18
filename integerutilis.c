@@ -81,5 +81,3 @@ char *_itoa(unsigned int n)
 	_reverse(s);
 	return (s);
 }
-
-

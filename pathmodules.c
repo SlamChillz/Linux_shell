@@ -6,7 +6,7 @@
  *
  * Return: path, if found or NULL
  */
-int path(char **token)
+int path(char **token, int loop)
 {
 	int i = 0;
 	char *path, **paths, *prev = token[0];
@@ -34,7 +34,7 @@ int path(char **token)
 		if (stat(prev, &st) == 0)
 			return (1);
 	}
-	printerror("./hsh", prev);
+	printerror("./hsh", prev, loop);
 	return (0);
 }
 
@@ -86,26 +86,26 @@ int checkoperand(char *str)
  *
  * Return: void
  */
-void run(char **token, int *prev, char *op)
+void run(char **token, int *prev, char *op, int loop)
 {
 	if (op == NULL || _strcmp(op, ";") == 0)
 	{
-		*prev = _execbuiltins(token);
+		*prev = _execbuiltins(token, prev);
 		/* printf("%d\n", prev); */
 		if (*prev)
-			*prev = _execpath(token);
+			*prev = _execpath(token, loop, prev);
 	}
 	else if ((*prev == 0) && (_strcmp(op, "&&") == 0))
 	{
-		*prev = _execbuiltins(token);
+		*prev = _execbuiltins(token, prev);
 		if (*prev)
-			*prev = _execpath(token);
+			*prev = _execpath(token, loop, prev);
 	}
 	else if ((*prev == 1) && (_strcmp(op, "||") == 0))
 	{
-		*prev = _execbuiltins(token);
+		*prev = _execbuiltins(token, prev);
 		if (*prev)
-			*prev = _execpath(token);
+			*prev = _execpath(token, loop, prev);
 	}
 	return;
 }
@@ -116,7 +116,7 @@ void run(char **token, int *prev, char *op)
  *
  * Return: exit status
  */
-int execute(char **tokens)
+int execute(char **tokens, int loop)
 {
 	int i, n = 0, prev;
 	char *op, **token;
@@ -138,7 +138,7 @@ int execute(char **tokens)
 		{
 			token = tokens + i - n;
 			token = cut(token, n);
-			run(token, &prev, op);
+			run(token, &prev, op, loop);
 			freearray(token);
 			op = tokens[i];
 			n = 0;
@@ -148,7 +148,7 @@ int execute(char **tokens)
 	}
 	token = tokens + i - n;
 	token = cut(token, n);
-	run(token, &prev, op);
+	run(token, &prev, op, loop);
 	freearray(token);
 	return (prev);
 }

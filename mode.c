@@ -1,9 +1,7 @@
 #include "main.h"
 
-int status, loop = 0;
-
 /**
- * rem_spe: remove special characters
+ * rem_spe - remove special characters
  *
  * @str: input string
  * Return: Modified string
@@ -16,7 +14,7 @@ char *rem_spe(char *str)
 }
 
 /**
- * rem_: remove spaces
+ * rem_ - remove spaces
  *
  * @str: input string
  * Return: Modified string
@@ -36,6 +34,7 @@ char *rem_(char *str)
 void nonint(char **argv)
 {
 	char *input, *t_input, **tokens;
+	int status, loop = 1;
 
 	t_input = readline();
 	if (!t_input)
@@ -49,9 +48,9 @@ void nonint(char **argv)
 	tokens = tokenise(input);
 
 	if (_strcmp(tokens[0], "exit") == 0)
-		_xit(input, argv, tokens);
+		_xit(input, argv, tokens, loop);
 	else
-		status = execute(tokens);
+		status = execute(tokens, loop);
 	free(t_input), freearray(tokens);
 	exit(status);
 }
@@ -64,7 +63,7 @@ void nonint(char **argv)
 void int_mode(char **argv)
 {
 	char *input, *t_input, **tokens;
-	loop = 0;
+	int status, loop = 0;
 	while (1)
 	{
 		loop++;
@@ -84,9 +83,9 @@ void int_mode(char **argv)
 		tokens = tokenise(input);
 
 		if (_strcmp(tokens[0], "exit") == 0)
-			_xit(input, argv, tokens);
+			_xit(input, argv, tokens, loop);
 		else
-			status = execute(tokens);
+			status = execute(tokens, loop);
 		free(t_input), freearray(tokens);
 		continue;
 	}

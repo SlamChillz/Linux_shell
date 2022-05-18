@@ -9,6 +9,7 @@
  */
 int main(int argc, char **argv)
 {
+	int status;
 	(void)(argc), (void)(argv);
 
 	if (argc == 2)

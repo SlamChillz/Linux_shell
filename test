@@ -1,4 +1,0 @@
-ls
-ls /tmp
-cd /tmp && ls -l
-

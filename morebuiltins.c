@@ -6,11 +6,12 @@
  *
  * Return: integer, execution status
  */
-int _chdir(char **tokens)
+int _chdir(char **tokens, int *stat)
 {
 	char cwd[PATH_MAX];
 	char *arr[4];
 	int status;
+	(void)(stat);
 
 	if (tokens[1] == NULL)
 	{
@@ -38,19 +39,19 @@ int _chdir(char **tokens)
 	}
 	arr[0] = "setenv", arr[1] = "OLDPWD", arr[2] = _getenv("PWD");
 	arr[3] = NULL;
-	_setenv(arr);
+	_setenv(arr, stat);
 	arr[0] = "setenv", arr[1] = "PWD", arr[2] = cwd, arr[3] = NULL;
-	_setenv(arr);
+	_setenv(arr, stat);
 	return (0);
 }
 
 /**
  * _echo - to handle special echo cases
- * @token - array of parsed strings
+ * @token: array of parsed strings
  *
  * Return: integer value, exit status
  */
-int _echo(char **token)
+int _echo(char **token, int *status)
 {
 	char *path, *e;
 	pid_t pid = getppid();
@@ -59,13 +60,13 @@ int _echo(char **token)
 		return (1);
 	if (_strncmp(token[1], "$?", 2) == 0)
 	{
-		if (status == 0)
+		if (*status == 0)
 		{
-			_putchar(status + '0');
+			_putchar(*status + '0');
 		}
 		else
 		{
-			e = _itoa(status);
+			e = _itoa(*status);
 			print(e), free(e);
 		}
 		print("\n");
@@ -104,4 +105,3 @@ int echocheck(char *str)
 
 	return (_strcmp(str, "echo"));
 }
-

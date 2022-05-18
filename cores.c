@@ -51,17 +51,17 @@ char *readline(void)
  *
  * Return: exit status
  */
-int _execpath(char **token)
+int _execpath(char **token, int loop, int *status)
 {
 	pid_t pid;
 	int wstatus;
 
-	if (!path(token))
+	if (!path(token, loop))
 		return (1);
 
 	if (!echocheck(token[0]))
 	{
-		if (!_echo(token))
+		if (!_echo(token, status))
 			return (0);
 	}
 	pid = fork();
@@ -94,7 +94,7 @@ int _execpath(char **token)
  *
  * Return: integer, status vaue
  */
-int _execbuiltins(char **tokens)
+int _execbuiltins(char **tokens, int *stat)
 {
 	int i, status = 1;
 	builtin b[] = {
@@ -103,14 +103,13 @@ int _execbuiltins(char **tokens)
 	    {"echo", _echo},
 	    {"setenv", _setenv},
 	    {"unsetenv", _unsetenv},
-	    {NULL, NULL}
-	};
+	    {NULL, NULL}};
 
 	for (i = 0; b[i].name; i++)
 	{
 		if (_strcmp(b[i].name, tokens[0]) == 0)
 		{
-			status = (b[i].func)(tokens);
+			status = (b[i].func)(tokens, stat);
 			break;
 		}
 	}
@@ -118,7 +117,7 @@ int _execbuiltins(char **tokens)
 }
 
 /**
- * batch_mode: batch run a script
+ * batch_mode - batch run a script
  *
  * @filename: name of file
  * Return: status
@@ -126,9 +125,10 @@ int _execbuiltins(char **tokens)
 int batch_mode(char *filename)
 {
 	FILE *fptr;
-	int status;
+	int status, loop = 0;
 	char line[1024];
 	char **args;
+
 	fptr = fopen(filename, "r");
 	if (fptr == NULL)
 	{
@@ -139,12 +139,12 @@ int batch_mode(char *filename)
 	{
 		while (fgets(line, sizeof(line), fptr) != NULL)
 		{
+			loop++;
 			args = tokenise(line);
-			status = execute(args);
+			status = execute(args, loop);
 			freearray(args);
 		}
 	}
 	fclose(fptr);
 	return (status);
 }
-

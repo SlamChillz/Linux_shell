@@ -2,14 +2,15 @@
 
 /**
  * _xit - exit the program with a status code
- * @n: loop count
+ *
  * @in: input from terminal
  * @argv: array of program name
+ * @n: number of shell loops
  * @tokens: array of tokens
  *
  * Return: void
  */
-void _xit(char *in, char **argv, char **tokens)
+void _xit(char *in, char **argv, char **tokens, int n)
 {
 	int i = 0, status;
 
@@ -22,7 +23,7 @@ void _xit(char *in, char **argv, char **tokens)
 	{
 		if (_isalpha(tokens[1][i++]) != 0)
 		{
-			exiterror(argv, tokens);
+			exiterror(argv, tokens, n);
 			free(in), freearray(tokens);
 			return;
 		}
@@ -35,7 +36,7 @@ void _xit(char *in, char **argv, char **tokens)
 	}
 	else if (_atoi(tokens[1]) < 0)
 	{
-		exiterror(argv, tokens);
+		exiterror(argv, tokens, n);
 		/* free(in), freearray(tokens); */
 		return;
 	}
@@ -47,9 +48,10 @@ void _xit(char *in, char **argv, char **tokens)
  *
  * Return: status code
  */
-int env(char **tokens)
+int env(char **tokens, int *stat)
 {
 	int i;
+	(void)(stat);
 
 	if (tokens[1])
 	{
@@ -71,9 +73,10 @@ int env(char **tokens)
  *
  * Return: integer
  */
-int _setenv(char **tokens)
+int _setenv(char **tokens, int *stat)
 {
 	int i, k, n;
+	(void)(stat);
 
 	if (!tokens[1] || !tokens[2])
 	{
@@ -116,9 +119,10 @@ int _setenv(char **tokens)
  *
  * Return: integer
  */
-int _unsetenv(char **tokens)
+int _unsetenv(char **tokens, int *stat)
 {
 	int i, k;
+	(void)(stat);
 
 	if (!tokens[1] || tokens[2])
 	{

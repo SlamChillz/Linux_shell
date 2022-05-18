@@ -52,6 +52,7 @@ int path(char **token);
 int checkoperand(char *str);
 char **cut(char **token, int n);
 void run(char **token);
+int echocheck(char *str);
 int _echo(char **token);
 int _execpath(char **token);
 int execute(char **tokens);

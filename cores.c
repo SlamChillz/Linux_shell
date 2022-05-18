@@ -58,6 +58,12 @@ int _execpath(char **token)
 
 	if (!path(token))
 		return (1);
+
+	if (!echocheck(token[0]))
+	{
+		if (!_echo(token))
+			return (0);
+	}
 	pid = fork();
 	if (pid == -1)
 	{

@@ -89,3 +89,19 @@ int _echo(char **token)
 	return (1);
 }
 
+/**
+ * echocheck - check if path is echo
+ * @str: path value
+ *
+ * Return: integer, 1 if true else 0
+ */
+int echocheck(char *str)
+{
+	int len;
+
+	len = _strlen(str);
+	str = str + len - 4;
+
+	return (_strcmp(str, "echo"));
+}
+

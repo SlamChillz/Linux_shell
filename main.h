@@ -34,6 +34,7 @@ int _isalpha(int c);
 int _atoi(char *s);
 
 char *readline(void);
+void hashtag(char *buff);
 char *rem_(char *str);
 char *rem_spe(char *str);
 int _strcount(char *str);

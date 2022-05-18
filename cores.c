@@ -32,7 +32,10 @@ char *readline(void)
 		_strcpy(ptr + ptrlen, buf);
 
 		if (buf[buflen - 1] == '\n')
+		{
+			hashtag(ptr);
 			return (ptr);
+		}
 		ptrlen += buflen;
 	}
 	if (EOF)

@@ -91,16 +91,6 @@ int checkoperand(char *str)
  */
 void run(char **token)
 {
-	/* printf("%d\n", prev); */
-	/*
-	while (token[i])
-	{
-		print(token[i]);
-		print("\n");
-		i++;
-	}
-	return;
-	*/
 	if (op == NULL || _strcmp(op, ";") == 0)
 	{
 		prev = _execbuiltins(token);
@@ -137,7 +127,16 @@ int execute(char **tokens)
 	prev = -1, op = NULL;
 	for (i = 0; tokens[i]; i++)
 	{
-		/* printf("%d\n", checkoperand(tokens[i])); */
+		if (checkoperand(tokens[i]) && checkoperand(tokens[i + 1]))
+		{
+			print("./hsh: "), _putchar(loop + '0');
+			print(": Syntax error: \""), print(tokens[i + 1]);
+			print("\" unexpected\n");
+			return (1);
+		}
+	}
+	for (i = 0; tokens[i]; i++)
+	{
 		if (checkoperand(tokens[i]))
 		{
 			token = tokens + i - n;
@@ -156,3 +155,4 @@ int execute(char **tokens)
 	freearray(token);
 	return (prev);
 }
+

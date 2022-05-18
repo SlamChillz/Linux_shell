@@ -1,8 +1,5 @@
 #include "main.h"
 
-int prev;
-char *op = NULL;
-
 /**
  * path - check if the command exit in PATH
  * @token: array to to a string of characters
@@ -89,26 +86,26 @@ int checkoperand(char *str)
  *
  * Return: void
  */
-void run(char **token)
+void run(char **token, int *prev, char *op)
 {
 	if (op == NULL || _strcmp(op, ";") == 0)
 	{
-		prev = _execbuiltins(token);
+		*prev = _execbuiltins(token);
 		/* printf("%d\n", prev); */
-		if (prev)
-			prev = _execpath(token);
+		if (*prev)
+			*prev = _execpath(token);
 	}
-	else if ((prev == 0) && (_strcmp(op, "&&") == 0))
+	else if ((*prev == 0) && (_strcmp(op, "&&") == 0))
 	{
-		prev = _execbuiltins(token);
-		if (prev)
-			prev = _execpath(token);
+		*prev = _execbuiltins(token);
+		if (*prev)
+			*prev = _execpath(token);
 	}
-	else if ((prev == 1) && (_strcmp(op, "||") == 0))
+	else if ((*prev == 1) && (_strcmp(op, "||") == 0))
 	{
-		prev = _execbuiltins(token);
-		if (prev)
-			prev = _execpath(token);
+		*prev = _execbuiltins(token);
+		if (*prev)
+			*prev = _execpath(token);
 	}
 	return;
 }
@@ -121,8 +118,8 @@ void run(char **token)
  */
 int execute(char **tokens)
 {
-	int i, n = 0;
-	char **token;
+	int i, n = 0, prev;
+	char *op, **token;
 
 	prev = -1, op = NULL;
 	for (i = 0; tokens[i]; i++)
@@ -141,7 +138,7 @@ int execute(char **tokens)
 		{
 			token = tokens + i - n;
 			token = cut(token, n);
-			run(token);
+			run(token, &prev, op);
 			freearray(token);
 			op = tokens[i];
 			n = 0;
@@ -151,8 +148,7 @@ int execute(char **tokens)
 	}
 	token = tokens + i - n;
 	token = cut(token, n);
-	run(token);
+	run(token, &prev, op);
 	freearray(token);
 	return (prev);
 }
-

@@ -37,7 +37,7 @@ int _atoi(char *s);
 
 char *readline(void);
 char *rem_(char *str);
-/*char *rem_spe(char *str);*/
+char *rem_spe(char *str);
 int _strcount(char *str);
 char **tokenise(char *str);
 
@@ -51,7 +51,7 @@ int _execbuiltins(char **tokens);
 int path(char **token);
 int checkoperand(char *str);
 char **cut(char **token, int n);
-void run(char **token);
+void run(char **token, int *prev, char *op);
 int echocheck(char *str);
 int _echo(char **token);
 int _execpath(char **token);

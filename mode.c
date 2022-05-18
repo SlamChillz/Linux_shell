@@ -52,7 +52,7 @@ void nonint(char **argv)
 		_xit(input, argv, tokens);
 	else
 		status = execute(tokens);
-	free(input), freearray(tokens);
+	free(t_input), freearray(tokens);
 	exit(status);
 }
 
@@ -87,7 +87,7 @@ void int_mode(char **argv)
 			_xit(input, argv, tokens);
 		else
 			status = execute(tokens);
-		free(input), freearray(tokens);
+		free(t_input), freearray(tokens);
 		continue;
 	}
 	exit(status);

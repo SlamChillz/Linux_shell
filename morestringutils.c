@@ -67,3 +67,26 @@ char *_strdup(char *str)
 
 	return (str2);
 }
+
+/**
+ * _strncmp - compare n number of characters in two strings
+ * @s1: pointer to string 1
+ * @s2: pointer to string 2
+ * @n: integer, number of strings to compare
+ *
+ * Return: integer, 0 if they are equal or otherwise
+ */
+int _strncmp(char *s1, char *s2, int n)
+{
+	int i;
+
+	if (s1 == NULL || s2 == NULL)
+		return (1);
+	for (i = 0; i < n && s1[i] && s2[i]; i++)
+	{
+		if ((s1[i] - s2[i]) != 0 || i == n - 1)
+			break;
+	}
+	return (s1[i] - s2[i]);
+}
+

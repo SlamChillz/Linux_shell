@@ -94,9 +94,11 @@ int _execbuiltins(char **tokens)
 	builtin b[] = {
 	    {"cd", _chdir},
 	    {"env", env},
+	    {"echo", _echo},
 	    {"setenv", _setenv},
 	    {"unsetenv", _unsetenv},
-	    {NULL, NULL}};
+	    {NULL, NULL}
+	};
 
 	for (i = 0; b[i].name; i++)
 	{
@@ -139,3 +141,4 @@ int batch_mode(char *filename)
 	fclose(fptr);
 	return (status);
 }
+

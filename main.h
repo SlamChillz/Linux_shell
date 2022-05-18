@@ -30,6 +30,7 @@ int _strcmp(char *s1, char *s2);
 char *copy(char *str, int n);
 char *join(char *s1, char *s2, char *str3);
 char *_strdup(char *str);
+int _strncmp(char *s1, char *s2, int n);
 
 int _isalpha(int c);
 int _atoi(char *s);
@@ -51,6 +52,7 @@ int path(char **token);
 int checkoperand(char *str);
 char **cut(char **token, int n);
 void run(char **token);
+int _echo(char **token);
 int _execpath(char **token);
 int execute(char **tokens);
 int batch_mode(char *filename);

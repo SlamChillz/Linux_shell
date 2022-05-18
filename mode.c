@@ -2,6 +2,12 @@
 
 int status, loop = 0;
 
+/**
+ * rem_spe: remove special characters
+ *
+ * @str: input string
+ * Return: Modified string
+ */
 char *rem_spe(char *str)
 {
 	while (*str == ' ' || *str == '\n')
@@ -9,6 +15,12 @@ char *rem_spe(char *str)
 	return (str);
 }
 
+/**
+ * rem_: remove spaces
+ *
+ * @str: input string
+ * Return: Modified string
+ */
 char *rem_(char *str)
 {
 	while (*str == ' ')
@@ -16,6 +28,11 @@ char *rem_(char *str)
 	return (str);
 }
 
+/**
+ * nonint - Non-interactive mode
+ *
+ * @argv: argument variables
+ */
 void nonint(char **argv)
 {
 	char *input, *t_input, **tokens;
@@ -39,6 +56,11 @@ void nonint(char **argv)
 	exit(status);
 }
 
+/**
+ * int_mode - Interactive mode
+ *
+ * @argv: argument variables
+ */
 void int_mode(char **argv)
 {
 	char *input, *t_input, **tokens;

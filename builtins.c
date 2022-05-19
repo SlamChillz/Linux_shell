@@ -45,6 +45,7 @@ void _xit(char *in, char **argv, char **tokens, int n)
 /**
  * env - display environmental variables
  * @tokens: pointer to an array of strings
+ * @stat: exit status
  *
  * Return: status code
  */
@@ -71,6 +72,7 @@ int env(char **tokens, int *stat)
 /**
  * _setenv - Initialize a new environment variable, or modify an existing one
  * @tokens: array of strings
+ * @stat: exit status
  *
  * Return: integer
  */
@@ -117,6 +119,7 @@ int _setenv(char **tokens, int *stat)
 /**
  * _unsetenv - unset environmental variables
  * @tokens: pointer to an array of strings
+ * @stat: exit status
  *
  * Return: integer
  */
@@ -186,3 +189,4 @@ char *_getenv(char *var)
 	}
 	return (NULL);
 }
+

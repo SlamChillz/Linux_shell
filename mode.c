@@ -31,7 +31,7 @@ char *rem_(char *str)
  *
  * @argv: argument variables
  */
-void nonint(char **argv)
+/*void nonint(char **argv)
 {
 	char *input, *t_input, **tokens;
 	int status, loop = 1;
@@ -54,7 +54,7 @@ void nonint(char **argv)
 	free(t_input), freearray(tokens);
 	exit(status);
 }
-
+*/
 /**
  * int_mode - Interactive mode
  *
@@ -62,22 +62,24 @@ void nonint(char **argv)
  */
 void int_mode(char **argv)
 {
-	char *input, *t_input, **tokens;
-	int status, loop = 0;
+	char *input = NULL, **tokens;
+	int status, loop = 0, read;
+	size_t bufflen = 0;
+
 	while (1)
 	{
 		loop++;
 		if (isatty(STDIN_FILENO))
 			prompt();
-		else
-			nonint(argv);
-		t_input = readline();
-		if (!t_input)
+		read = getline(&input, &bufflen, stdin);
+		if (read == EOF)
+			exit(0);
+		if (!input)
 			break;
-		input = rem_(t_input);
+		/* input = rem_(input); */
 		if (input[0] == '\0' || _strcmp(input, "\n") == 0)
 		{
-			free(t_input);
+			free(input);
 			continue;
 		}
 		tokens = tokenise(input);
@@ -86,8 +88,9 @@ void int_mode(char **argv)
 			_xit(input, argv, tokens, loop);
 		else
 			status = execute(tokens, loop);
-		free(t_input), freearray(tokens);
+		free(input), freearray(tokens);
 		continue;
 	}
 	exit(status);
 }
+

@@ -92,19 +92,19 @@ void run(char **token, int *prev, char *op, int loop)
 	{
 		*prev = _execbuiltins(token, prev);
 		/* printf("%d\n", prev); */
-		if (*prev)
+		if (*prev == 1)
 			*prev = _execpath(token, loop, prev);
 	}
 	else if ((*prev == 0) && (_strcmp(op, "&&") == 0))
 	{
 		*prev = _execbuiltins(token, prev);
-		if (*prev)
+		if (*prev == 1)
 			*prev = _execpath(token, loop, prev);
 	}
-	else if ((*prev == 1) && (_strcmp(op, "||") == 0))
+	else if ((*prev != 0) && (_strcmp(op, "||") == 0))
 	{
 		*prev = _execbuiltins(token, prev);
-		if (*prev)
+		if (*prev == 1)
 			*prev = _execpath(token, loop, prev);
 	}
 	return;
@@ -152,3 +152,4 @@ int execute(char **tokens, int loop)
 	freearray(token);
 	return (prev);
 }
+
